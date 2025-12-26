@@ -16,22 +16,22 @@ Initializes a cmake project using the following settings:
 - `Google Test` <- automatically fetched
 
 ## Structure
-- CMakeLists.txt
-- main.cpp
-- .gitignore
-- src
-    - CMakeLists.txt
-    - [project name].cpp
-    - [project name].h
-    - release_assert.h
-- test
-    - CMakeLists.txt
-    - [project name].cpp
-- out
-    - Debug
-        - [project name]
-    - Release
-        - [project name]
+├─CMakeLists.txt
+├─main.cpp
+├─.gitignore
+├─src
+│ ├───CMakeLists.txt
+│ ├───[project name].cpp
+│ ├───[project name].h
+│ └───release_assert.h
+├─test
+│ ├───CMakeLists.txt
+│ └───[project name].cpp
+└─out
+  ├───Debug
+  │   └───[project name]
+  └───Release
+      └───[project name]
 
 The source code and structure provided, enables quickly setting up a working cross-platform C++ project without having 
 to customize trivial settings, such as which compiler to use, version of C++, how to configure tests, and how a basic code
