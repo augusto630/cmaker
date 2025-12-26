@@ -16,6 +16,7 @@ Initializes a cmake project using the following settings:
 - `Google Test` <- automatically fetched
 
 ## Structure
+```
 ├─CMakeLists.txt
 ├─main.cpp
 ├─.gitignore
@@ -32,6 +33,7 @@ Initializes a cmake project using the following settings:
   │   └───[project name]
   └───Release
       └───[project name]
+```
 
 The source code and structure provided, enables quickly setting up a working cross-platform C++ project without having 
 to customize trivial settings, such as which compiler to use, version of C++, how to configure tests, and how a basic code
