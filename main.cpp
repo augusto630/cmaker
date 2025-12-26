@@ -2,10 +2,6 @@
 
 #include "cmaker.h"
 
-int main(const int argc, const char **args) {
-    if (cmaker::args.parseArgs(argc, args) == false) {
-        return EXIT_FAILURE;
-    }
-
-    return cmaker::main{}.run();
+int main(const int argc, const char * const*argv) {
+    return cmaker::main{}.run(argc, argv);
 }

@@ -4,8 +4,8 @@ Pronounced `See-make-lower-case-r`
 Initializes a cmake project using the following settings:
 - `Clang/Clang++`
 - `C++ 17`
-- Conformant C++ Enabled
-- Binaries output to ./out/
+- Conformant `C++` Enabled
+- Binaries output to `out/`
 - Configured `Google Test`
 - Configured `Include what you use - iwyu`
 - Release assertions
@@ -18,33 +18,40 @@ Initializes a cmake project using the following settings:
 
 ## Structure
 ```
- ├─CMakeLists.txt
- ├─main.cpp
- ├─.gitignore
- ├─src
- │ ├───CMakeLists.txt
- │ ├───[project name].cpp
- │ ├───[project name].h
- │ └───release_assert.h
- ├─test
- │ ├───CMakeLists.txt
- │ └───[project name].cpp
- └─out
-   ├───Debug
-   │   └───[project name]
-   └───Release
-       └───[project name]
+├─CMakeLists.txt
+├─main.cpp
+├─.gitignore
+├─cmake
+│ ├───version.cmake
+│ └───iwyu.cmake
+├─src
+│ ├───CMakeLists.txt
+│ ├───[project name].cpp
+│ ├───[project name].h
+│ └───release_assert.h
+├─test
+│ ├───CMakeLists.txt
+│ └───[project name].cpp
+└─out
+ ├───Debug
+ │   └───[project name]
+ └───Release
+     └───[project name]
 ```
 
 The source code and structure provided, enables quickly setting up a working cross-platform C++ project without having 
 to customize trivial settings, such as which compiler to use, version of C++, how to configure tests, and how a basic code
-architecture should look like
+architecture could look like.
 
 A simple abstraction is provided for decoupling the main function from the application code.
 This is achieved by redirecting calls from the `main(...)` function to an object called `[project name]` where arguments
 can be parsed, as well as the initial logic for the application to be inserted.
 
 A header only file `release_assert.h` is also provided to facilitate release time asserts.
+
+A couple of helper `.cmake` files are bundled into the `cmake` folder:
+- `version.cmake` adds a file `version.h` that can be used by the application to display its current version
+- `iwyu.cmake` adds a new target `fix_includes_iwyu` which when built, will find and fix missing includes and remove unnecessary includes
 
 ## Usage
 ```bash

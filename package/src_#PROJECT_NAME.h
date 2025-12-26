@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 namespace #PROJECT_NAME {
     class main {
@@ -8,7 +9,7 @@ namespace #PROJECT_NAME {
     public:
         main(const int argc, const char **argv) {
             for (int i = 1; i < argc; i++) {
-                args.push_back(argv[i]);
+                args.emplace_back(argv[i]);
             }
         }
 

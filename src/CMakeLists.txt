@@ -3,9 +3,12 @@ add_library(${CMAKE_PROJECT_NAME}_lib SHARED
         ${CMAKE_PROJECT_NAME}.cpp
         ${CMAKE_PROJECT_NAME}.h
         release_assert.h
+        print.h
+        args.h
 )
 
-target_include_directories(${CMAKE_PROJECT_NAME}_lib INTERFACE
+target_include_directories(${CMAKE_PROJECT_NAME}_lib
+        PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/
-        ${CMAKE_CURRENT_SOURCE_DIR}/../gen/${CMAKE_BINARY_DIR}
+        ${CMAKE_BINARY_DIR}/gen/
 )

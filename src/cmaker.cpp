@@ -1,29 +1,21 @@
 #include "cmaker.h"
 
 #include <_stdlib.h>
-#include <_string.h>
 #include <errno.h>
+#include <_string.h>
+#include <string>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
 #include <utility>
 
-// #include "embedded_package.h"
 #include "release_assert.h"
-#include "../gen/Debug/embedded_package.h"
-//
-// #define write(folder, file, ext) \
-//     assert(std::filesystem::exists(#file "." #ext) == false, "Directory is not empty, " file "." ext "already exists."); \
-//     std::ofstream file {#file "." #ext, std::ios::out | std::ios::trunc}; \
-//     assert( file .is_open(), strerror(errno)); \
-//     file << embedded:: ##folder##_##file##_##ext## _sv << std::endl; \
-//     file .close()
-
+#include "embedded_package.h"
+#include "version.h"
 
 #define PROJECT_NAME "#PROJECT_NAME"
 
 namespace cmaker {
-
     std::string main::replaceProjectName(const std::string &projectName, std::string_view content) {
         std::string result{content};
 
@@ -36,8 +28,17 @@ namespace cmaker {
         return result;
     }
 
+    template<typename... T>
+    void main::print(T &... t) const {
+        if (args.quiet)
+            return;
+
+        // ((expr)...) fold expansion, it recursively calls expr as long as there are ... to unpack
+        ((std::cout << t), ...);
+    }
+
     void main::write(const std::string &projectName, const std::string &dir, const std::string &file,
-                     const std::string_view content) {
+                     const std::string_view content) const {
         std::filesystem::path path = std::filesystem::current_path();
         path /= dir;
         path /= file;
@@ -64,10 +65,14 @@ namespace cmaker {
         print("Created file ", path, "\n");
     }
 
-    int main::run() const {
+    int main::run(const int argc, const char *const*argv) {
+        if (args.parseArgs(argc, argv) == false) {
+            return EXIT_FAILURE;
+        };
+
         const auto path = std::filesystem::current_path();
 
-        print("CMaker v1.0.0\n");
+        print("CMaker v", version::semantic, "\n");
         print("Using args:\n");
         print("   Project Name: ", args.projectName, "\n");
         print("   Truncate: ", std::boolalpha, args.truncate, std::noboolalpha, "\n");
@@ -75,6 +80,10 @@ namespace cmaker {
 
         for (const auto &[identifier, content]: embedded::files) {
             assert(!identifier.empty(), "empty identifier")
+
+            // Skipped files starts with _
+            if (identifier[0] == '_')
+                continue;
 
             std::string dir{};
             std::string file{};

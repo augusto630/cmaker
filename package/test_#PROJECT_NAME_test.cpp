@@ -1,4 +1,6 @@
-#include <gtest/gtest.h>
+#include <string>
+
+#include "gtest/gtest.h"
 
 TEST(#PROJECT_NAME, my_test_case) {
     // Arrange
@@ -9,5 +11,5 @@ TEST(#PROJECT_NAME, my_test_case) {
     const auto c = a + b;
 
     // Assert
-    ASSERT_EQ(3, c);
+    ASSERT_EQ(2, c);
 }

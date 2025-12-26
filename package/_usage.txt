@@ -1,0 +1,6 @@
+Usage: cmaker [Options] [Arg]
+
+Options: [-h|--help] print this help
+      [-t|--truncate] truncates existing files
+      [-d|--dry] executes a dry-run
+      [-p|--project] [Arg] specifies the project name, if omitted, the current directory will be used instead
