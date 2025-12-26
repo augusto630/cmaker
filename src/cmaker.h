@@ -23,6 +23,7 @@ namespace cmaker {
 
             if (arguments.count("-h") || arguments.count("--help")) {
                 std::cout << "Usage: cmaker [Options] [Arg]\n";
+                std::cout << "\n";
                 std::cout << "Options: [-h|--help] print this help\n";
                 std::cout << "         [-t|--truncate] truncates existing files\n";
                 std::cout << "         [-d|--dry] executes a dry-run\n";
