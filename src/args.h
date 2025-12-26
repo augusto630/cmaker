@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include "version.h"
 #include "release_assert.h"
+#include "strings_helper.h"
 
 namespace cmaker {
     struct argsInfo {
@@ -43,6 +44,7 @@ namespace cmaker {
             projectName = arguments.count("-p") ? arguments["-p"] : projectName;
             projectName = arguments.count("--project") ? arguments["--project"] : projectName;
             projectName = projectName.empty() ? std::filesystem::current_path().filename().string() : projectName;
+            projectName = strings::replace(std::string{projectName}, "-", "_");
 
             dryRun = arguments.count("-d") || arguments.count("--dry");
             quiet = arguments.count("-q") || arguments.count("--quiet");

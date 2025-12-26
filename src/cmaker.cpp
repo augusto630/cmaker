@@ -14,22 +14,11 @@
 #include "release_assert.h"
 #include "embedded_package.h"
 #include "version.h"
+#include "strings_helper.h"
 
 #define PROJECT_NAME "#PROJECT_NAME"
 
 namespace cmaker {
-    std::string main::replaceProjectName(const std::string &projectName, std::string_view content) {
-        std::string result{content};
-
-        auto pos = result.find(PROJECT_NAME);
-        while (pos != std::string::npos) {
-            result.replace(pos, std::size(PROJECT_NAME) - 1, projectName);
-            pos = result.find(PROJECT_NAME);
-        }
-
-        return result;
-    }
-
     template<typename... T>
     void main::print(T &... t) const {
         if (args.quiet)
@@ -60,7 +49,7 @@ namespace cmaker {
         std::ofstream fileStream{path, std::ios::out | std::ios::trunc};
         assert(fileStream.is_open(), strerror(errno));
 
-        fileStream << replaceProjectName(projectName, content);
+        fileStream << strings::replace(std::string{content}, PROJECT_NAME, projectName);
         fileStream.close();
         assert(fileStream.good(), "failed saving file " << path << strerror(errno));
 
@@ -99,7 +88,7 @@ namespace cmaker {
                 file = identifier;
             }
 
-            file = replaceProjectName(args.projectName, file);
+            file = strings::replace(std::string{file}, PROJECT_NAME, args.projectName);
             write(args.projectName, dir, file, content);
         }
 

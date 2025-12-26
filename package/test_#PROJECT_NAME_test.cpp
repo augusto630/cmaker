@@ -18,7 +18,7 @@ TEST(#PROJECT_NAME, main_should_return_0) {
 
 TEST(#PROJECT_NAME, help_should_return_1) {
     // Arrange
-    test_cmaker::main main{};
+    #PROJECT_NAME::main main{};
     std::array<const char*, 2> args{"", "-h"};
 
     // Act
