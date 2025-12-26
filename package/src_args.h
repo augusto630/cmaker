@@ -1,5 +1,4 @@
 #pragma once
-#include <embedded_package.h>
 #include <filesystem>
 #include <iostream>
 #include <string>
@@ -7,16 +6,31 @@
 #include "version.h"
 #include "release_assert.h"
 
-namespace cmaker {
+namespace #PROJECT_NAME {
     struct argsInfo {
-        bool quiet{};
-        bool truncate{};
-        bool dryRun{};
-        std::string projectName{};
+        bool doSomething{};
 
+        /**
+         * parses arguments into a map of options and option args
+         * for example:
+         * @code
+          ./myApp -a myArg -t -o otherArg1 otherArg2 otherArg3
+
+          will result in the following map:
+
+          -a : myArg
+          -t : ""
+          -o : otherArg1
+          "" : otherArg2 otherArg3
+         * @endcode
+         * @param argc argument count
+         * @param args argument pointer
+         * @return whether to continue the application or not
+         */
         bool parseArgs(const int argc, const char *const*args) {
             assert(argc == 0 || args != nullptr, "expected at least one value on args, but found nullptr");
             std::unordered_map<std::string, std::string> arguments{};
+
             std::string option{};
             for (int i = 1; i < argc; i++) {
 
@@ -34,19 +48,19 @@ namespace cmaker {
                 option.clear();
             }
 
+            // prints current project name and version when -h o --help is passed
             if (arguments.count("-h") || arguments.count("--help")) {
-                std::cout << "CMaker v" << version::semantic << "\n";
-                std::cout << embedded::_usage_txt_sv << std::endl;
+                std::cout << "#PROJECT_NAME v" << version::semantic;
                 return false;
             }
 
-            projectName = arguments.count("-p") ? arguments["-p"] : projectName;
-            projectName = arguments.count("--project") ? arguments["--project"] : projectName;
-            projectName = projectName.empty() ? std::filesystem::current_path().filename().string() : projectName;
+            // assigns doSomething to true when -d or --do-something is passed as an argument
+            doSomething = arguments.count("-d") || arguments.count("--do-something");
 
-            dryRun = arguments.count("-d") || arguments.count("--dry");
-            quiet = arguments.count("-q") || arguments.count("--quiet");
-            truncate = arguments.count("-t") || arguments.count("--truncate");
+            /*
+             * add here handling or further options
+             */
+
             return true;
         }
     };

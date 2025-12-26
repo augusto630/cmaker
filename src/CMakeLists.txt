@@ -3,7 +3,6 @@ add_library(${CMAKE_PROJECT_NAME}_lib SHARED
         ${CMAKE_PROJECT_NAME}.cpp
         ${CMAKE_PROJECT_NAME}.h
         release_assert.h
-        print.h
         args.h
 )
 

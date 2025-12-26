@@ -9,7 +9,7 @@
 
 namespace cmaker {
     class main {
-        argsInfo args;
+        argsInfo args{};
 
         template<typename... T>
         void print(T &... t) const;

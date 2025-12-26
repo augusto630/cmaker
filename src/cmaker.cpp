@@ -8,6 +8,8 @@
 #include <fstream>
 #include <iterator>
 #include <utility>
+#include <iostream>
+#include <unordered_map>
 
 #include "release_assert.h"
 #include "embedded_package.h"
@@ -58,7 +60,7 @@ namespace cmaker {
         std::ofstream fileStream{path, std::ios::out | std::ios::trunc};
         assert(fileStream.is_open(), strerror(errno));
 
-        fileStream << replaceProjectName(projectName, content) << std::endl;
+        fileStream << replaceProjectName(projectName, content);
         fileStream.close();
         assert(fileStream.good(), "failed saving file " << path << strerror(errno));
 

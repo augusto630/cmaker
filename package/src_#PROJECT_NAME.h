@@ -2,17 +2,15 @@
 #include <vector>
 #include <string>
 
+#include "args.h"
+
 namespace #PROJECT_NAME {
     class main {
-        std::vector<std::string> args{};
+        #PROJECT_NAME::argsInfo args;
 
     public:
-        main(const int argc, const char **argv) {
-            for (int i = 1; i < argc; i++) {
-                args.emplace_back(argv[i]);
-            }
-        }
-
-        int run();
+        int run(int argc, const char **argv);
     };
+
+
 }
