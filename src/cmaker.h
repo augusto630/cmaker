@@ -4,6 +4,9 @@
 #include <iostream>
 #include <unordered_set>
 #include <vector>
+#include <string>
+#include <string_view>
+#include <unordered_map>
 
 namespace cmaker {
     struct args {

@@ -1,4 +1,5 @@
-#include <_stdlib.h>  // for EXIT_FAILURE
+#include <_stdlib.h>
+
 #include "cmaker.h"
 
 int main(const int argc, const char **args) {

@@ -1,7 +1,12 @@
 #include "cmaker.h"
 
+#include <_stdlib.h>
+#include <_string.h>
+#include <errno.h>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
+#include <utility>
 
 // #include "embedded_package.h"
 #include "release_assert.h"

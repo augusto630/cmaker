@@ -18,9 +18,8 @@ add_subdirectory(test)
 add_executable(${CMAKE_PROJECT_NAME} main.cpp)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PROJECT_NAME}_lib)
 
-# Configure iwyu
-# Flag iwyu will flag when an unused include is added to an object
-find_program(iwyu_path NAMES include-what-you-use iwyu REQUIRED)
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_INCLUDE_WHAT_YOU_USE ${iwyu_path})
-set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY C_INCLUDE_WHAT_YOU_USE ${iwyu_path})
+option(ENABLE_IWYU "Enable include-what-you-use" ON)
+include(iwyu.cmake)
+
+
 

@@ -1,4 +1,6 @@
-#include <gtest/gtest.h>
+#include <string>
+
+#include "gtest/gtest.h"
 
 TEST(cmaker, my_test_case) {
     // Arrange

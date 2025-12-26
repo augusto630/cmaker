@@ -11,28 +11,29 @@ Initializes a cmake project using the following settings:
 - Release assertions
 
 ## Dependencies
-- `Clang` <- must be installed manually
-- `iwyu` <- must be installed manually
-- `Google Test` <- automatically fetched
+- `Clang` - *must be installed manually*
+- `iwyu` - *must be installed manually*
+    - `iwyu_tool.py` and `fix_includes.py` are required to run target `fix_includes_iwyu`
+- `Google Test` - *automatically fetched*
 
 ## Structure
 ```
-├─CMakeLists.txt
-├─main.cpp
-├─.gitignore
-├─src
-│ ├───CMakeLists.txt
-│ ├───[project name].cpp
-│ ├───[project name].h
-│ └───release_assert.h
-├─test
-│ ├───CMakeLists.txt
-│ └───[project name].cpp
-└─out
-  ├───Debug
-  │   └───[project name]
-  └───Release
-      └───[project name]
+ ├─CMakeLists.txt
+ ├─main.cpp
+ ├─.gitignore
+ ├─src
+ │ ├───CMakeLists.txt
+ │ ├───[project name].cpp
+ │ ├───[project name].h
+ │ └───release_assert.h
+ ├─test
+ │ ├───CMakeLists.txt
+ │ └───[project name].cpp
+ └─out
+   ├───Debug
+   │   └───[project name]
+   └───Release
+       └───[project name]
 ```
 
 The source code and structure provided, enables quickly setting up a working cross-platform C++ project without having 
@@ -43,7 +44,7 @@ A simple abstraction is provided for decoupling the main function from the appli
 This is achieved by redirecting calls from the `main(...)` function to an object called `[project name]` where arguments
 can be parsed, as well as the initial logic for the application to be inserted.
 
-A simple header only file is also provided to facilitate release time asserts, see `release_assert.h` for more details.
+A header only file `release_assert.h` is also provided to facilitate release time asserts.
 
 ## Usage
 ```bash
