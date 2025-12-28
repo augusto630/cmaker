@@ -13,6 +13,9 @@ enable_testing()
 add_executable(
         ${CMAKE_PROJECT_NAME}_test
         ${CMAKE_PROJECT_NAME}_test.cpp
+        string_helper_test.cpp
+        test_cases.h
+        args_test.cpp
 )
 
 target_link_libraries(

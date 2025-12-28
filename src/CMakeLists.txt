@@ -4,7 +4,8 @@ add_library(${CMAKE_PROJECT_NAME}_lib SHARED
         ${CMAKE_PROJECT_NAME}.h
         release_assert.h
         args.h
-        strings_helper.h
+        string_helper.h
+        tuple_hash.h
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}_lib

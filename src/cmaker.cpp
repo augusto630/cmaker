@@ -6,7 +6,6 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <iterator>
 #include <utility>
 #include <iostream>
 #include <unordered_map>
@@ -14,7 +13,7 @@
 #include "release_assert.h"
 #include "embedded_package.h"
 #include "version.h"
-#include "strings_helper.h"
+#include "string_helper.h"
 
 #define PROJECT_NAME "#PROJECT_NAME"
 
@@ -49,14 +48,14 @@ namespace cmaker {
         std::ofstream fileStream{path, std::ios::out | std::ios::trunc};
         assert(fileStream.is_open(), strerror(errno));
 
-        fileStream << strings::replace(std::string{content}, PROJECT_NAME, projectName);
+        fileStream << stde::string::replace(std::string{content}, PROJECT_NAME, projectName);
         fileStream.close();
         assert(fileStream.good(), "failed saving file " << path << strerror(errno));
 
         print("Created file ", path, "\n");
     }
 
-    int main::run(const int argc, const char *const*argv) {
+    int main::run(const int argc, const char * const*argv) {
         if (args.parseArgs(argc, argv) == false) {
             return EXIT_FAILURE;
         };
@@ -88,7 +87,7 @@ namespace cmaker {
                 file = identifier;
             }
 
-            file = strings::replace(std::string{file}, PROJECT_NAME, args.projectName);
+            file = stde::string::replace(std::string{file}, PROJECT_NAME, args.projectName);
             write(args.projectName, dir, file, content);
         }
 
